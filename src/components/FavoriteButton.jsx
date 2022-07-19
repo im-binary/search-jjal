@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FavoriteButton({ imgSrc, heart, setHeart, favorite, setFavorite }) {
+export default function FavoriteButton({ imgSrc, favorite, setFavorite }) {
   const handleHeartClick = (e) => {
     setFavorite([...favorite, imgSrc]);
 

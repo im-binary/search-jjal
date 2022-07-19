@@ -9,7 +9,6 @@ export default function SearchList() {
   const [list, setList] = useState([]);
   const [keyword, setKeyword] = useState("cat");
   const [favorite, setFavorite] = useState([]);
-  const [heart, setHeart] = useState("🤍");
 
   const gifAPIurl = `https://api.giphy.com/v1/gifs/search?api_key=A1XrfRGc2MX7wmZktzh08ZucZJztvS7E&q=${keyword}&limit=20`;
 
@@ -33,13 +32,7 @@ export default function SearchList() {
             <li key={item.id}>
               <Image src={item.images.original.url} alt={item.title} />
 
-              <FavoriteButton
-                imgSrc={item.images.original.url}
-                heart={heart}
-                setHeart={setHeart}
-                favorite={favorite}
-                setFavorite={setFavorite}
-              />
+              <FavoriteButton imgSrc={item.images.original.url} favorite={favorite} setFavorite={setFavorite} />
             </li>
           ))
         ) : (
