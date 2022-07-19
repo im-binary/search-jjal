@@ -52,6 +52,10 @@ const UlGifListContainer = styled.ul`
   align-items: center;
   gap: 10px;
 
+  li {
+    background: #eeecf3;
+    padding: 20px;
+  }
   @media (max-width: 926px) {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
