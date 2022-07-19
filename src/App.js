@@ -1,5 +1,11 @@
+import SearchList from "./pages/SearchList";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <SearchList />
+    </>
+  );
 }
 
 export default App;
