@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function FavoriteButton({ imgSrc, favorite, setFavorite }) {
-  const handleHeartClick = (e) => {
+  const handleHeartClick = () => {
     setFavorite([...favorite, imgSrc]);
 
     if (favorite.includes(imgSrc)) {
