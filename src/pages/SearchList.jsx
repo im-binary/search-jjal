@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Image from "../components/Image";
 
 export default function SearchList() {
   const [list, setList] = useState([]);
@@ -31,7 +32,7 @@ export default function SearchList() {
       <UlGifListContainer>
         {list.map((item, i) => (
           <li key={item.id}>
-            <img src={item.images.original.url} key={item.id} alt={item.title} />
+            <Image src={item.images.original.url} alt={item.title} />
           </li>
         ))}
       </UlGifListContainer>
@@ -42,9 +43,6 @@ export default function SearchList() {
 const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
-  img {
-    width: 300px;
-  }
 `;
 
 const InputSearch = styled.input`
