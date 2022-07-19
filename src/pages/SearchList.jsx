@@ -3,32 +3,48 @@ import axios from "axios";
 import styled from "styled-components";
 import Image from "../components/Image";
 import SearchInput from "../components/SearchInput";
+import FavoriteButton from "../components/FavoriteButton";
 
 export default function SearchList() {
   const [list, setList] = useState([]);
   const [keyword, setKeyword] = useState("cat");
+  const [favorite, setFavorite] = useState([]);
+  const [heart, setHeart] = useState("🤍");
 
-  const gifAPIurl = `https://api.giphy.com/v1/gifs/search?api_key=A1XrfRGc2MX7wmZktzh08ZucZJztvS7E&q=${keyword}`;
+  const gifAPIurl = `https://api.giphy.com/v1/gifs/search?api_key=A1XrfRGc2MX7wmZktzh08ZucZJztvS7E&q=${keyword}&limit=20`;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const gifApi = async () => {
     const response = await axios.get(gifAPIurl);
-    setList(response.data.data);
+    const dataList = response.data.data.filter((el) => el.images.preview_gif.size < 49999);
+    setList(dataList);
   };
 
   useEffect(() => {
     gifApi();
-  }, [gifApi, keyword]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyword]);
 
   return (
     <section>
       <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
       <UlGifListContainer>
-        {list.map((item) => (
-          <li key={item.id}>
-            <Image src={item.images.original.url} alt={item.title} />
-          </li>
-        ))}
+        {list.length > 0 ? (
+          list.map((item) => (
+            <li key={item.id}>
+              <Image src={item.images.original.url} alt={item.title} />
+
+              <FavoriteButton
+                imgSrc={item.images.original.url}
+                heart={heart}
+                setHeart={setHeart}
+                favorite={favorite}
+                setFavorite={setFavorite}
+              />
+            </li>
+          ))
+        ) : (
+          <p>검색결과가 없습니다</p>
+        )}
       </UlGifListContainer>
     </section>
   );
