@@ -8,7 +8,6 @@ export default function Loading() {
 const LoadingSpace = styled.article`
   width: 300px;
   height: 300px;
-  border: 1px solid;
   display: flex;
   align-items: center;
   justify-content: center;
