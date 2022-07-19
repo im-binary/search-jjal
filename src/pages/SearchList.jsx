@@ -50,12 +50,21 @@ const UlGifListContainer = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 
   li {
     background: #eeecf3;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgb(0 0 0 / 36%);
+    transition: 500ms ease-in-out;
   }
+
+  li:hover {
+    transition: 500ms ease-in-out;
+    transform: scale(1.1);
+  }
+
   @media (max-width: 926px) {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
