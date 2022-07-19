@@ -46,6 +46,7 @@ export default function SearchList() {
 const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
+  padding-top: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;

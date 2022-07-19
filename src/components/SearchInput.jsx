@@ -7,14 +7,23 @@ export default function SearchInput({ setKeyword, gifApi }) {
     setKeyword(value);
   };
   return (
-    <>
+    <Header>
       <label htmlFor='searchKeyword'>
         <InputSearch name='searchKeyword' type='text' onChange={handleChange} />
       </label>
       <ButtonSearch onClick={gifApi}>검색</ButtonSearch>
-    </>
+    </Header>
   );
 }
+
+const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  z-index: 999;
+`;
 
 const InputSearch = styled.input`
   width: calc(100% - 100px);
