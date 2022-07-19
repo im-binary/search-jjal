@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Image from "../components/Image";
+import SearchInput from "../components/SearchInput";
 
 export default function SearchList() {
   const [list, setList] = useState([]);
@@ -19,18 +20,11 @@ export default function SearchList() {
     gifApi();
   }, [gifApi, keyword]);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setKeyword(value);
-  };
-
   return (
     <section>
-      <label htmlFor='searchKeyword'></label>
-      <InputSearch name='searchKeyword' type='text' onChange={handleChange} />
-      <ButtonSearch onClick={gifApi}>검색</ButtonSearch>
+      <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
       <UlGifListContainer>
-        {list.map((item, i) => (
+        {list.map((item) => (
           <li key={item.id}>
             <Image src={item.images.original.url} alt={item.title} />
           </li>
@@ -43,23 +37,9 @@ export default function SearchList() {
 const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
-`;
-
-const InputSearch = styled.input`
-  width: 300px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 0 10px;
-  margin-bottom: 10px;
-`;
-
-const ButtonSearch = styled.button`
-  width: 100px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 0 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
 `;
