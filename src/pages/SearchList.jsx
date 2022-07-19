@@ -38,8 +38,17 @@ const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 300px 300px 300px;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 926px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  @media (max-width: 634px) {
+    grid-template-columns: 1fr;
+  }
 `;
