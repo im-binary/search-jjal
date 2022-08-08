@@ -31,7 +31,6 @@ export default function SearchList() {
           list.map((item) => (
             <li key={item.id}>
               <Image src={item.images.original.url} alt={item.title} />
-
               <FavoriteButton imgSrc={item.images.original.url} favorite={favorite} setFavorite={setFavorite} />
             </li>
           ))
