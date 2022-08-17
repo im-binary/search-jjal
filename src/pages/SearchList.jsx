@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Image from "../components/Image";
 import SearchInput from "../components/SearchInput";
 import FavoriteButton from "../components/FavoriteButton";
+import FavoriteZone from "../components/FavoriteZone";
 
 export default function SearchList() {
   const [list, setList] = useState([]);
@@ -30,14 +31,7 @@ export default function SearchList() {
   return (
     <article>
       <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
-      <HeartSection>
-        {favorite.map((item, index) => (
-          <div key={`favorite-${index}`}>
-            <button onClick={() => handleDelete(item)}>💔</button>
-            <img src={item} alt='' />
-          </div>
-        ))}
-      </HeartSection>
+      <FavoriteZone favorite={favorite} handleDelete={handleDelete} />
       <UlGifListContainer>
         {list.length > 0 ? (
           list.map((item) => (
@@ -53,31 +47,6 @@ export default function SearchList() {
     </article>
   );
 }
-
-const HeartSection = styled.section`
-  margin-top: 50px;
-  padding: 20px;
-  background-color: #eaeaea;
-  height: 300px;
-  display: flex;
-  overflow-x: scroll;
-  gap: 10px;
-
-  div {
-    position: relative;
-  }
-
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 2px 4px;
-  }
-
-  img {
-    height: 100%;
-  }
-`;
 
 const UlGifListContainer = styled.ul`
   list-style: none;
