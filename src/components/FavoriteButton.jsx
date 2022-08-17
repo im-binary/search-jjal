@@ -2,10 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 export default function FavoriteButton({ imgSrc, favorite, setFavorite }) {
+  localStorage.setItem("favorite", JSON.stringify(favorite));
+
   const handleHeartClick = () => {
     setFavorite([...favorite, imgSrc]);
 
     if (favorite.includes(imgSrc)) {
+      localStorage.setItem("favorite", JSON.stringify([...favorite, imgSrc]));
       setFavorite(favorite.filter((item) => item !== imgSrc));
     }
   };
