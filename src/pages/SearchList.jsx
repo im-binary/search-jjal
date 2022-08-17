@@ -18,6 +18,10 @@ export default function SearchList() {
     setList(dataList);
   };
 
+  const handleDelete = (imgSrc) => {
+    setFavorite(favorite.filter((item) => item !== imgSrc));
+  };
+
   useEffect(() => {
     gifApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +32,10 @@ export default function SearchList() {
       <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
       <HeartSection>
         {favorite.map((item, index) => (
-          <img src={item} key={index} alt='' />
+          <div key={`favorite-${index}`}>
+            <button onClick={() => handleDelete(item)}>💔</button>
+            <img src={item} alt='' />
+          </div>
         ))}
       </HeartSection>
       <UlGifListContainer>
@@ -49,13 +56,23 @@ export default function SearchList() {
 
 const HeartSection = styled.section`
   margin-top: 50px;
-  padding: 10px;
+  padding: 20px;
   background-color: #eaeaea;
   height: 300px;
-  border: 1px solid;
   display: flex;
   overflow-x: scroll;
   gap: 10px;
+
+  div {
+    position: relative;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 4px;
+  }
 
   img {
     height: 100%;
