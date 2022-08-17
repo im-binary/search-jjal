@@ -24,8 +24,13 @@ export default function SearchList() {
   }, [keyword]);
 
   return (
-    <section>
+    <article>
       <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
+      <HeartSection>
+        {favorite.map((item, index) => (
+          <img src={item} key={index} alt='' />
+        ))}
+      </HeartSection>
       <UlGifListContainer>
         {list.length > 0 ? (
           list.map((item) => (
@@ -38,9 +43,24 @@ export default function SearchList() {
           <p>검색결과가 없습니다</p>
         )}
       </UlGifListContainer>
-    </section>
+    </article>
   );
 }
+
+const HeartSection = styled.section`
+  margin-top: 50px;
+  padding: 10px;
+  background-color: #eaeaea;
+  height: 300px;
+  border: 1px solid;
+  display: flex;
+  overflow-x: scroll;
+  gap: 10px;
+
+  img {
+    height: 100%;
+  }
+`;
 
 const UlGifListContainer = styled.ul`
   list-style: none;
