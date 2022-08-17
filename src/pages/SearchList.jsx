@@ -31,7 +31,7 @@ export default function SearchList() {
   return (
     <article>
       <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
-      <FavoriteZone favorite={favorite} handleDelete={handleDelete} />
+      <FavoriteZone favorite={favorite} setFavorite={setFavorite} handleDelete={handleDelete} />
       <UlGifListContainer>
         {list.length > 0 ? (
           list.map((item) => (
