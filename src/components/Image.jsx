@@ -18,6 +18,6 @@ export default function Image({ src, alt }) {
 }
 
 const Img = styled.img`
-  width: 300px;
+  width: 100%;
   display: ${(props) => (props.loading ? "none" : "block")};
 `;
