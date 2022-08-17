@@ -6,10 +6,11 @@ export default function SearchInput({ setKeyword, gifApi }) {
     const value = e.target.value;
     setKeyword(value);
   };
+
   return (
     <Header>
       <label htmlFor='searchKeyword'>
-        <InputSearch name='searchKeyword' type='text' onChange={handleChange} />
+        <InputSearch name='searchKeyword' type='text' onChange={handleChange} placeholder='cat' />
       </label>
       <ButtonSearch onClick={gifApi}>검색</ButtonSearch>
     </Header>
