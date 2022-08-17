@@ -96,9 +96,14 @@ export default function FavoriteZone({ favorite, setFavorite, handleDelete }) {
 }
 
 const HeartSection = styled.section`
-  margin-top: 50px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+
   padding: 20px;
-  background-color: #eaeaea;
+  background-color: black;
   height: 300px;
   display: flex;
   overflow-x: scroll;
