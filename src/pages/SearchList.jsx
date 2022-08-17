@@ -10,6 +10,7 @@ export default function SearchList() {
   const [list, setList] = useState([]);
   const [keyword, setKeyword] = useState("cat");
   const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("favorite")) || []);
+  const [open, setOpen] = useState(false);
 
   const gifAPIurl = `https://api.giphy.com/v1/gifs/search?api_key=A1XrfRGc2MX7wmZktzh08ZucZJztvS7E&q=${keyword}&limit=20`;
 
@@ -19,19 +20,24 @@ export default function SearchList() {
     setList(dataList);
   };
 
-  const handleDelete = (imgSrc) => {
-    setFavorite(favorite.filter((item) => item !== imgSrc));
-  };
-
   useEffect(() => {
     gifApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
+  const handleDelete = (imgSrc) => {
+    setFavorite(favorite.filter((item) => item !== imgSrc));
+  };
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <article>
       <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
-      <FavoriteZone favorite={favorite} setFavorite={setFavorite} handleDelete={handleDelete} />
+      <FavoriteZoneButton onClick={handleOpen}>❤️</FavoriteZoneButton>
+      {open ? <FavoriteZone favorite={favorite} setFavorite={setFavorite} handleDelete={handleDelete} /> : null}
       <UlGifListContainer>
         {list.length > 0 ? (
           list.map((item) => (
@@ -48,10 +54,24 @@ export default function SearchList() {
   );
 }
 
+const FavoriteZoneButton = styled.button`
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px rgb(0 0 0 / 36%);
+`;
+
 const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 10px;
+  margin-top: 70px;
   /* display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
