@@ -16,6 +16,12 @@ export async function searchGif({ keyword, pageNumber }) {
       lang: "en",
     },
   });
+  const { data, pagination } = response.data;
+  const { count, offset, total_count } = pagination;
 
-  return response.data.data;
+  return {
+    result: data,
+    nextPage: pageNumber + 1,
+    isLast: count + offset >= total_count,
+  };
 }

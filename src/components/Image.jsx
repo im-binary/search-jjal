@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 import Loading from "./Loading";
 
-export default function Image({ src, alt }) {
+export function Image({ src, alt, width }) {
   const [loading, setLoading] = React.useState(true);
 
   const onLoad = useCallback(() => {
@@ -11,7 +11,7 @@ export default function Image({ src, alt }) {
 
   return (
     <>
-      {loading && <Loading />}
+      {loading && <Loading width={width} />}
       <Img onLoad={onLoad} src={src} alt={alt} />
     </>
   );
