@@ -59,8 +59,8 @@ export function GifList({ keyword }) {
           <p>검색결과가 없습니다</p>
         )}
       </UlGifListContainer>
-      <More onClick={fetchNextPage} ref={bottomRef}>
-        더 보기
+      <More ref={bottomRef}>
+        <span onClick={fetchNextPage}>더 보기</span>
       </More>
     </>
   );
@@ -109,4 +109,14 @@ const More = styled.div`
   color: white;
   font-weight: bold;
   padding: 10px;
+
+  height: 1050px;
+  margin-top: -1000px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+
+  span {
+    cursor: pointer;
+  }
 `;

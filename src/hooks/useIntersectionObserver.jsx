@@ -5,23 +5,21 @@ export const useIntersectionObserver = (onIntersecting) => {
   const bottomRef = createRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    bottomObserver.current = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log(1);
           onIntersecting();
         }
       },
-      { threshold: 0.25, rootMargin: "1000px" }
+      { threshold: 0, rootMargin: "1000px" }
     );
-    bottomObserver.current = observer;
   }, [onIntersecting]);
 
   useEffect(() => {
     const observer = bottomObserver.current;
     const el = bottomRef.current;
 
-    if (bottomRef.current) {
+    if (el) {
       observer.observe(el);
     }
 

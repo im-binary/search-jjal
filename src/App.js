@@ -20,7 +20,6 @@ const SectionAppContainer = styled.section`
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 20px;
-  background: linear-gradient(90deg, #624479, #1f043d);
 `;
 
 export default App;
