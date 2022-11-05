@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import qs from "qs";
 
-export default function SearchInput() {
-  const { q } = qs.parse(window.location.search.slice(1));
-  const [text, setText] = useState(q);
+export default function SearchInput({ keyword }) {
+  const [text, setText] = useState(keyword);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -12,6 +10,7 @@ export default function SearchInput() {
   };
 
   const searchKeyword = () => {
+    if (text === "") return;
     window.location.href = `?q=${text}`;
   };
 

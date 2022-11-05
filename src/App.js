@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styled from "styled-components";
-import SearchList from "./pages/SearchList";
+import { SearchListPage } from "./pages/SearchListPage";
 import GlobalStyle from "./styles/GlobalStyle";
 
 const queryClient = new QueryClient();
@@ -10,7 +10,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <SectionAppContainer>
         <GlobalStyle />
-        <SearchList />
+        <SearchListPage />
       </SectionAppContainer>
     </QueryClientProvider>
   );
