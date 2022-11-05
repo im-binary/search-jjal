@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import qs from "qs";
 
-export default function SearchInput({ setKeyword, gifApi }) {
+export default function SearchInput() {
+  const { q } = qs.parse(window.location.search.slice(1));
+  const [text, setText] = useState(q);
+
   const handleChange = (e) => {
     const value = e.target.value;
-    setKeyword(value);
+    setText(value);
+  };
+
+  const searchKeyword = () => {
+    window.location.href = `?q=${text}`;
   };
 
   return (
     <Header>
       <label htmlFor='searchKeyword'>
-        <InputSearch name='searchKeyword' type='text' onChange={handleChange} placeholder='cat' />
+        <InputSearch
+          name='searchKeyword'
+          type='text'
+          onChange={handleChange}
+          placeholder='cat'
+          value={text}
+          onKeyUp={(e) => {
+            if (e.code === "Enter") {
+              searchKeyword();
+            }
+          }}
+        />
       </label>
-      <ButtonSearch onClick={gifApi}>검색</ButtonSearch>
+      <ButtonSearch onClick={searchKeyword}>검색</ButtonSearch>
     </Header>
   );
 }

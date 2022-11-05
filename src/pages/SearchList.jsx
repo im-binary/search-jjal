@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "../components/Image";
 import SearchInput from "../components/SearchInput";
 import FavoriteButton from "../components/FavoriteButton";
 import FavoriteZone from "../components/FavoriteZone";
+import { searchGif } from "../apis/searchGif";
+import { useQuery } from "@tanstack/react-query";
+import qs from "qs";
 
 export default function SearchList() {
-  const [list, setList] = useState([]);
-  const [keyword, setKeyword] = useState("cat");
+  const { q } = qs.parse(window.location.search.slice(1));
+
+  const [pageNumber, setPageNumber] = useState(1);
+
   const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("favorite")) || []);
   const [open, setOpen] = useState(false);
 
-  const gifAPIurl = `https://api.giphy.com/v1/gifs/search?api_key=A1XrfRGc2MX7wmZktzh08ZucZJztvS7E&q=${keyword}&limit=20`;
-
-  const gifApi = async () => {
-    const response = await axios.get(gifAPIurl);
-    const dataList = response.data.data.filter((el) => el.images.preview_gif.size < 49999);
-    setList(dataList);
-  };
-
-  useEffect(() => {
-    gifApi();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyword]);
+  const { data: list, isLoading } = useQuery(["searchGif", q, pageNumber], () => {
+    return searchGif({ keyword: q, pageNumber });
+  });
 
   const handleDelete = (imgSrc) => {
     setFavorite(favorite.filter((item) => item !== imgSrc));
@@ -33,9 +28,13 @@ export default function SearchList() {
     setOpen(!open);
   };
 
+  if (isLoading) {
+    return <>로딩중</>;
+  }
+
   return (
     <article>
-      <SearchInput setKeyword={setKeyword} gifApi={gifApi} />
+      <SearchInput />
       <FavoriteZoneButton onClick={handleOpen}>❤️</FavoriteZoneButton>
       {open ? <FavoriteZone favorite={favorite} setFavorite={setFavorite} handleDelete={handleDelete} /> : null}
       <UlGifListContainer>

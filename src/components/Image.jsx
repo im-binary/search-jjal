@@ -12,7 +12,7 @@ export default function Image({ src, alt }) {
   return (
     <>
       {loading && <Loading />}
-      <Img onLoad={onLoad} src={src} alt={alt} loading={loading} />
+      <Img onLoad={onLoad} src={src} alt={alt} />
     </>
   );
 }
