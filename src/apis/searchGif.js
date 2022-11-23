@@ -16,6 +16,7 @@ export async function searchGif({ keyword, pageNumber }) {
       lang: "en",
     },
   });
+
   const { data, pagination } = response.data;
   const { count, offset, total_count } = pagination;
 
