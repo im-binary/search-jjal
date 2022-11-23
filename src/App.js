@@ -19,7 +19,6 @@ function App() {
 const SectionAppContainer = styled.section`
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 20px;
 `;
 
 export default App;
