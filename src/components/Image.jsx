@@ -18,8 +18,9 @@ export function Image({ src, alt, width }) {
 }
 
 const Img = styled.img`
+  display: ${(props) => (props.loading ? "none" : "block")};
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: ${(props) => (props.loading ? "none" : "block")};
+  vertical-align: top;
 `;
