@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import SearchInput from "../components/SearchInput";
+import { Suspense } from "react";
+import { SearchInput } from "../components/SearchInput";
 import qs from "qs";
 import { GifList } from "../components/GifList";
 import { SearchLoading } from "../components/SearchLoading";

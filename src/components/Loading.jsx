@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-export default function Loading({ width = 300 }) {
+export function Loading() {
   return (
     <LoadingSpace>
       <p>Loading...</p>
@@ -11,26 +10,22 @@ export default function Loading({ width = 300 }) {
 
 const LoadingSpace = styled.article`
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  animation: skeletonGradient 2s linear infinite;
 
   p {
-    animation: biggerAndSmaller 2s linear infinite;
-    letter-spacing: 0.2em;
+    text-indent: -99999px;
   }
 
-  @keyframes biggerAndSmaller {
+  @keyframes skeletonGradient {
     0% {
-      transform: scale(1);
+      background-color: #a5a5a5;
     }
-
     50% {
-      transform: scale(1.2);
+      background-color: #a5a5a5;
+      opacity: 0.7;
     }
-
     100% {
-      transform: scale(1);
+      background-color: #a5a5a5;
     }
   }
 `;

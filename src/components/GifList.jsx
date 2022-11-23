@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React from "react";
 import { Image } from "./Image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchGif } from "../apis/searchGif";
@@ -27,11 +26,11 @@ export function GifList({ keyword }) {
   const list = data.pages
     .map((x) => x.result)
     .flat()
-    .filter(
-      (item) =>
-        Number(item.images[TYPE].height / item.images[TYPE].width) < 1.5 &&
-        Number(item.images[TYPE].width / item.images[TYPE].height) < 1.5
-    )
+    // .filter(
+    //   (item) =>
+    //     Number(item.images[TYPE].height / item.images[TYPE].width) < 1.5 &&
+    //     Number(item.images[TYPE].width / item.images[TYPE].height) < 1.5
+    // )
     .map((item) => {
       const itemStyle = {
         gridRowEnd: `span ${Math.floor(Number((250 * item.images[TYPE].height) / item.images[TYPE].width) / 20)}`,
@@ -66,7 +65,6 @@ export function GifList({ keyword }) {
 const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 70px;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);
@@ -76,7 +74,6 @@ const UlGifListContainer = styled.ul`
 
   li {
     width: 100%;
-    background: #eeecf3;
     border-radius: 10px;
     box-shadow: 3px 3px 10px rgb(0 0 0 / 36%);
     transition: 500ms ease-in-out;
