@@ -33,14 +33,11 @@ export function GifList({ keyword }) {
         Number(item.images[TYPE].width / item.images[TYPE].height) < 1.5
     )
     .map((item) => {
-      const height = (250 * item.images[TYPE].height) / item.images[TYPE].width;
-      const width = (height * item.images[TYPE].width) / item.images[TYPE].height;
       const itemStyle = {
-        height: `${(250 * item.images[TYPE].height) / item.images[TYPE].width}px`,
         gridRowEnd: `span ${Math.floor(Number((250 * item.images[TYPE].height) / item.images[TYPE].width) / 20)}`,
       };
 
-      return { ...item, width, itemStyle };
+      return { ...item, itemStyle };
     });
 
   return (
@@ -75,12 +72,11 @@ const UlGifListContainer = styled.ul`
   grid-template-columns: repeat(auto-fill, 250px);
   grid-auto-rows: 20px;
   justify-content: center;
-  gap: 5px 24px;
+  gap: 14px;
 
   li {
     width: 100%;
     background: #eeecf3;
-    /* padding: 10px; */
     border-radius: 10px;
     box-shadow: 3px 3px 10px rgb(0 0 0 / 36%);
     transition: 500ms ease-in-out;
@@ -90,17 +86,6 @@ const UlGifListContainer = styled.ul`
   li:hover {
     transition: 500ms ease-in-out;
     transform: scale(1.03);
-  }
-
-  @media (max-width: 926px) {
-    /* grid-template-columns: 1fr 1fr; */
-    /* gap: 15px; */
-    /* column-count: 2; */
-  }
-
-  @media (max-width: 634px) {
-    /* grid-template-columns: 1fr; */
-    /* column-count: 1; */
   }
 `;
 
