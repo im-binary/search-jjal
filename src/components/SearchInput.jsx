@@ -50,10 +50,13 @@ const InputSearch = styled.input`
   border-radius: 5px;
   width: 100%;
   padding: 10px 6px 10px 10px;
+  font-size: 1.6rem;
 `;
 
 const ButtonSearch = styled.button`
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #efefef;
   cursor: pointer;
+  font-size: 1.6rem;
 `;

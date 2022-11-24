@@ -36,6 +36,8 @@ const Section = styled.section`
   p {
     text-align: center;
     margin-top: 20px;
+    font-size: 1.6rem;
+    word-break: keep-all;
 
     span {
       position: relative;
