@@ -5,8 +5,8 @@ import { searchGif } from "../apis/searchGif";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 // TODO: downsized_small 로 하려면 mp4를 보여주도록 개선해야함
-// const TYPE = "original";
-const TYPE = "preview_webp";
+const TYPE = "original";
+// const TYPE = "preview_webp";
 
 export function GifList({ keyword }) {
   const { data, fetchNextPage } = useInfiniteQuery(
@@ -22,15 +22,13 @@ export function GifList({ keyword }) {
     }
   );
 
+  const isLast = data.pages.map((x) => x.isLast).pop();
+
   const { bottomRef } = useIntersectionObserver(fetchNextPage);
+
   const list = data.pages
     .map((x) => x.result)
     .flat()
-    // .filter(
-    //   (item) =>
-    //     Number(item.images[TYPE].height / item.images[TYPE].width) < 1.5 &&
-    //     Number(item.images[TYPE].width / item.images[TYPE].height) < 1.5
-    // )
     .map((item) => {
       const itemStyle = {
         gridRowEnd: `span ${Math.floor(Number((250 * item.images[TYPE].height) / item.images[TYPE].width) / 20)}`,
@@ -39,32 +37,39 @@ export function GifList({ keyword }) {
       return { ...item, itemStyle };
     });
 
+  if (list.length === 0 || list == null) {
+    return <EmptyResult>검색결과가 없습니다</EmptyResult>;
+  }
+
   return (
     <>
       <UlGifListContainer>
-        {list.length > 0 ? (
-          list.map((item) => {
-            return (
-              <li key={item.id} style={item.itemStyle}>
-                <Image src={item.images[TYPE].url} alt={item.title} width={item.width} />
-                {/* <FavoriteButton imgSrc={item.images[TYPE].url} favorite={favorite} setFavorite={setFavorite} /> */}
-              </li>
-            );
-          })
-        ) : (
-          <p>검색결과가 없습니다</p>
-        )}
+        {list.length > 0 &&
+          list.map((item, index) => (
+            <li key={`${item.id}-${index}`} style={item?.itemStyle}>
+              <Image src={item.images[TYPE].url} alt={item.title} width={item.width} />
+            </li>
+          ))}
       </UlGifListContainer>
-      <More ref={bottomRef}>
-        <span onClick={fetchNextPage}>더 보기</span>
-      </More>
+
+      {!isLast && (
+        <More ref={bottomRef}>
+          <span onClick={fetchNextPage}>더 보기</span>
+        </More>
+      )}
     </>
   );
 }
 
+const EmptyResult = styled.p`
+  margin-top: 20px;
+  text-align: center;
+`;
+
 const UlGifListContainer = styled.ul`
   list-style: none;
   padding: 0;
+  text-align: center;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);
@@ -76,7 +81,7 @@ const UlGifListContainer = styled.ul`
     width: 100%;
     border-radius: 10px;
     box-shadow: 3px 3px 10px rgb(0 0 0 / 36%);
-    transition: 500ms ease-in-out;
+    transition: 0.5s ease-in-out;
     overflow: hidden;
   }
 
