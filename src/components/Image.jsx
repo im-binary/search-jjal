@@ -1,13 +1,13 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Loading } from "./Loading";
 
 export function Image({ src, alt, width }) {
   const [loading, setLoading] = useState(true);
 
-  const onLoad = useCallback(() => {
+  const onLoad = () => {
     setLoading(false);
-  }, []);
+  };
 
   return (
     <>
