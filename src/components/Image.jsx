@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Loading } from "./Loading";
 
-export function Image({ src, alt, width }) {
+export function Image({ src, alt }) {
   const [loading, setLoading] = useState(true);
 
   const onLoad = () => {
@@ -18,7 +18,6 @@ export function Image({ src, alt, width }) {
 }
 
 const Img = styled.img`
-  display: ${(props) => (props.loading ? "none" : "block")};
   width: 100%;
   height: 100%;
   object-fit: cover;

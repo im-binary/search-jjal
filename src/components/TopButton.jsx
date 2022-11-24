@@ -38,10 +38,9 @@ const Button = styled.button`
 
   &.visible {
     color: #000;
-    display: block;
     position: fixed;
-    bottom: 106px;
-    right: 28px;
+    bottom: 20px;
+    right: 20px;
     font-size: 2.5rem;
     padding: 10px;
     border-radius: 20px;
