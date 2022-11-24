@@ -3,10 +3,12 @@ import { Image } from "./Image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchGif } from "../apis/searchGif";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { TopButton } from "./TopButton";
 
 // TODO: downsized_small 로 하려면 mp4를 보여주도록 개선해야함
-const TYPE = "original";
+// const TYPE = "original";
 // const TYPE = "preview_webp";
+const TYPE = "downsized";
 
 export function GifList({ keyword }) {
   const { data, fetchNextPage } = useInfiniteQuery(
@@ -51,7 +53,7 @@ export function GifList({ keyword }) {
             </li>
           ))}
       </UlGifListContainer>
-
+      <TopButton />
       {!isLast && (
         <More ref={bottomRef}>
           <span onClick={fetchNextPage}>더 보기</span>
