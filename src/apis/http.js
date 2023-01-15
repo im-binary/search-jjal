@@ -4,7 +4,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://api.giphy.com/",
-  timeout: 1000,
+  timeout: 30_000,
 });
 
 export const get = ({ url, params }) => {
