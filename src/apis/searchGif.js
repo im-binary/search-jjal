@@ -1,14 +1,12 @@
 import { get } from "./http";
 
-// @see https://developers.giphy.com/docs/optional-settings/#language-support
-
 const PAGE_SIZE = 25;
 
 export async function searchGif({ keyword, pageNumber }) {
   const response = await get({
-    url: "/v1/gifs/search",
+    url: "v1/gifs/search",
     params: {
-      api_key: "J43xKsQiTF9zEhHfUhTzoGJ4431QzGrP",
+      api_key: process.env.REACT_APP_GIPHY_API_KEY,
       q: keyword,
       limit: PAGE_SIZE,
       offset: PAGE_SIZE * (pageNumber - 1),
